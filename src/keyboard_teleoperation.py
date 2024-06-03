@@ -60,9 +60,6 @@ class DroneTeleoperator:
             self.pub.publish(self.odom)
             self.rate.sleep()
 
-        except AttributeError:
-            pass
-
 
 if __name__ == "__main__":
     rospy.init_node("keyboard_teleoperation_node", anonymous=True)
