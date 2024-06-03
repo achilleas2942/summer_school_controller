@@ -31,7 +31,7 @@ if __name__ == '__main__':
     try:
         capturer_node = rospy.init_node('udp_send_cmd', anonymous=True)
         socket = SendData("127.0.0.1", 30105)
-        topic = '/vel_msg'
+        topic = '/cmd_vel'
         subscriber = rospy.Subscriber(
             topic, TwistStamped, stack_data, callback_args=socket)
         rospy.spin()
