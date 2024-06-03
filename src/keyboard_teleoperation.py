@@ -59,6 +59,8 @@ class DroneTeleoperator:
             self.odom.header.stamp = rospy.Time.now()
             self.pub.publish(self.odom)
             self.rate.sleep()
+        except AttributeError:
+            pass
 
 
 if __name__ == "__main__":
