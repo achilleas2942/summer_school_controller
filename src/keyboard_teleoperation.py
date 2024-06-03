@@ -30,9 +30,6 @@ class DroneTeleoperator:
     def on_press(self, key):
         ## INSERT YOUR CODE HERE
 
-        except AttributeError:
-            pass
-
 
 if __name__ == "__main__":
     rospy.init_node("keyboard_teleoperation_node", anonymous=True)
