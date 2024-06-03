@@ -22,7 +22,6 @@ class PositionPredictor:
         ## INSERT YOUR CODE HERE
 
     def callback_cmd_vel(self, msg):
-        ## INSERT YOUR CODE HERE
         self.cmd_vel[0] = msg.twist.linear.x
         self.cmd_vel[1] = msg.twist.linear.y
         self.cmd_vel[2] = msg.twist.linear.z
