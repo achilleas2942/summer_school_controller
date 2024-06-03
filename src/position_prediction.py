@@ -4,6 +4,7 @@ import rospy
 import numpy as np
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import TwistStamped
+from std_msgs.msg import Float32
 
 
 class PositionPredictor:
@@ -11,12 +12,19 @@ class PositionPredictor:
         self.cmd_vel = np.array([0.0, 0.0, 0.0])
 
         self.odom_sub = rospy.Subscriber("/odometry", Odometry, self.callback_odometry)
+        self.down_delay_sub = rospy.Subscriber(
+            "/downlink_delay", Float32, self.callback_downlink_delay
+        )
+
         self.cmd_vel_sub = rospy.Subscriber(
             "/cmd_vel", TwistStamped, self.callback_cmd_vel
         )
         self.est_odom_pub = rospy.Publisher(
             "/estimated_odometry", Odometry, queue_size=10
         )
+
+    def callback_downlink_delay(self, msg):
+        self.downlink = msg.data
 
     def callback_odometry(self, msg):
         ## INSERT YOUR CODE HERE
