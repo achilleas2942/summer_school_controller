@@ -13,6 +13,7 @@ class PositionPredictor:
         self.counter = 0
         self.cmd_vel = np.array([0.0, 0.0, 0.0])
 
+
         self.odom_sub = rospy.Subscriber("/odometry", Odometry, self.callback_odometry)
         self.cmd_vel_sub = rospy.Subscriber(
             "/cmd_vel", TwistStamped, self.callback_cmd_vel
