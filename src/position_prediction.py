@@ -4,6 +4,7 @@ import rospy
 import numpy as np
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import TwistStamped
+from std_msgs.msg import Float32
 
 
 class PositionPredictor:
@@ -11,16 +12,22 @@ class PositionPredictor:
         self.uplink = 0.0
         self.downlink = 0.0
         self.counter = 0
-        self.counter2 = 0
         self.cmd_vel = np.array([0.0, 0.0, 0.0])
 
         self.odom_sub = rospy.Subscriber("/odometry", Odometry, self.callback_odometry)
+        self.down_delay_sub = rospy.Subscriber(
+            "/downlink_delay", Float32, self.callback_downlink_delay
+        )
+
         self.cmd_vel_sub = rospy.Subscriber(
             "/cmd_vel", TwistStamped, self.callback_cmd_vel
         )
         self.est_odom_pub = rospy.Publisher(
             "/estimated_odometry", Odometry, queue_size=10
         )
+
+    def callback_downlink_delay(self, msg):
+        self.downlink = msg.data
 
     def callback_odometry(self, msg):
         self.estimated_odometry = Odometry()
@@ -44,14 +51,6 @@ class PositionPredictor:
         self.est_odom_pub.publish(self.estimated_odometry)
 
     def callback_cmd_vel(self, msg):
-        recv_time = rospy.Time.now()
-        pub_time = msg.header.stamp
-        delay = (recv_time - pub_time).to_sec()
-        if self.counter2 < 500:  # sliding window of 500 messages
-            self.counter2 = self.counter2 + 1
-        self.downlink = np.divide(
-            delay + (self.counter2 - 1) * self.downlink, self.counter2
-        )
         self.cmd_vel[0] = msg.twist.linear.x
         self.cmd_vel[1] = msg.twist.linear.y
         self.cmd_vel[2] = msg.twist.linear.z
