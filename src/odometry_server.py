@@ -66,7 +66,7 @@ class Pub_Node():
 
 if __name__ == '__main__':
     try:
-        rospy.init_node('udp_server_node', anonymous=True)
+        rospy.init_node('udp_receive_odom', anonymous=True)
         topic = '/odometry'
         pub_node = Pub_Node(topic)
         udp_socket = SocketServer(

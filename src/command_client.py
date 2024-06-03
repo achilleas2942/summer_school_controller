@@ -29,7 +29,7 @@ def stack_data(data, socket):
 
 if __name__ == '__main__':
     try:
-        capturer_node = rospy.init_node('udp_send', anonymous=True)
+        capturer_node = rospy.init_node('udp_send_cmd', anonymous=True)
         socket = SendData("127.0.0.1", 30105)
         topic = '/vel_msg'
         subscriber = rospy.Subscriber(
