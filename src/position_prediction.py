@@ -13,7 +13,6 @@ class PositionPredictor:
         self.counter = 0
         self.cmd_vel = np.array([0.0, 0.0, 0.0])
 
-
         self.odom_sub = rospy.Subscriber("/odometry", Odometry, self.callback_odometry)
         self.cmd_vel_sub = rospy.Subscriber(
             "/cmd_vel", TwistStamped, self.callback_cmd_vel
@@ -49,7 +48,9 @@ class PositionPredictor:
         delay = (recv_time - pub_time).to_sec()
         if self.counter < 500:  # sliding window of 500 messages
             self.counter = self.counter + 1
-        self.downlink = np.divide(delay + (self.counter - 1) * self.downlink, self.counter)
+        self.downlink = np.divide(
+            delay + (self.counter - 1) * self.downlink, self.counter
+        )
         self.cmd_vel[0] = msg.twist.linear.x
         self.cmd_vel[1] = msg.twist.linear.y
         self.cmd_vel[2] = msg.twist.linear.z
