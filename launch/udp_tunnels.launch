@@ -1,0 +1,8 @@
+<launch>
+    <node pkg="summer_school_controller" type="command_client.py" name="udp_send_cmd" output="screen">
+    </node>
+  
+    <node pkg="summer_school_controller" type="odometry_server.py" name="udp_receive_odom" output="screen">
+    </node>
+  
+  </launch>
