@@ -29,7 +29,7 @@ class VelocityController:
         self.orientation[1] = msg.pose.pose.orientation.y
         self.orientation[2] = msg.pose.pose.orientation.z
         self.orientation[3] = msg.pose.pose.orientation.w
-        self.vel_sp()
+        self.velocity_publisher()
 
     def callback_setpoint(self, msg):
         self.des_position[0] = msg.pose.pose.position.x
@@ -40,7 +40,7 @@ class VelocityController:
         self.des_orientation[2] = msg.pose.pose.orientation.z
         self.des_orientation[3] = msg.pose.pose.orientation.w
 
-    def vel_sp(self):
+    def velocity_publisher(self):
         ## INSERT YOUR CODE HERE
 
 

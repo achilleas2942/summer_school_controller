@@ -29,6 +29,12 @@ class PositionPredictor:
     def callback_odometry(self, msg):
         ## INSERT YOUR CODE HERE
 
+        #estimate_delay
+
+        #predict_position
+
+        self.est_odom_pub.publish(msg)  ## CHANGE msg TO YOUR ESTIMATED ODOMETRY
+
     def callback_cmd_vel(self, msg):
         self.cmd_vel[0] = msg.twist.linear.x
         self.cmd_vel[1] = msg.twist.linear.y
