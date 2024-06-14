@@ -12,9 +12,6 @@ class VelocityController:
         self.orientation = np.array([0.0, 0.0, 0.0, 1.0])
         self.des_position = np.array([0.0, 0.0, 0.0])
         self.des_orientation = np.array([0.0, 0.0, 0.0, 1.0])
-        self.error_pos = np.array([0.0, 0, 0])
-        self.Kpos = np.array([-0.8, -0.8, -1.5])
-        self.Korient = -0.3
 
         self.odom_sub = rospy.Subscriber(
             "/estimated_odometry", Odometry, self.callback_odometry
@@ -44,19 +41,8 @@ class VelocityController:
         self.des_orientation[3] = msg.pose.pose.orientation.w
 
     def velocity_publisher(self):
-        self.error_pos = self.position - self.des_position
-        # self.error_orient = self.orientation - self.des_orientation
-
-        des_vel = self.Kpos * self.error_pos
-        # desYawVel = self.Korient*self.error_orient[2]
-
-        vel_sp = TwistStamped()
-        vel_sp.twist.linear.x = des_vel[0]
-        vel_sp.twist.linear.y = des_vel[1]
-        vel_sp.twist.linear.z = des_vel[2]
-        # vel_sp.twist.angular.z = desYawVel
-        vel_sp.header.stamp = rospy.Time.now()
-        self.cmd_vel_pub.publish(vel_sp)
+        ## INSERT YOUR CODE HERE
+        pass  # remove pass after inserting your code
 
 
 if __name__ == "__main__":
