@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: summer_school_controller
+Description: Description of summer_school_controller
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

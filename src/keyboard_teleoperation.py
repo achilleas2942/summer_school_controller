@@ -22,7 +22,7 @@ class DroneTeleoperator:
         self.odom.pose.pose.orientation.y = 0.0
         self.odom.pose.pose.orientation.z = 0.0
         self.odom.pose.pose.orientation.w = 1.0
-        self.rate = rospy.Rate(10)  # 10 Hz
+        self.rate = rospy.Rate(10)  # rate of 10 Hz
 
         # Start keyboard listener
         self.listener = keyboard.Listener(on_press=self.on_press)
